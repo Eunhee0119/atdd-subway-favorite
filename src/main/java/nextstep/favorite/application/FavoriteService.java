@@ -36,9 +36,9 @@ public class FavoriteService {
         Station target = stationService.getStations(favoriteRequest.getTarget());
         pathService.getPaths(source.getId(),target.getId());
         Favorite favorite = favoriteRepository.save(Favorite.builder()
-                .member(member)
-                .source(source)
-                .target(target)
+                .memberId(member.getId())
+                .sourceId(source.getId())
+                .targetId(target.getId())
                 .build());
 
         return FavoriteResponse.of(favorite);
@@ -46,9 +46,9 @@ public class FavoriteService {
 
     public List<FavoriteResponse> findFavorite(String email) {
         Member member = memberService.findMemberByEmail(email);
-        return favoriteRepository.findByMember(member)
+        return favoriteRepository.findByMemberId(member.getId())
                 .stream()
-                .map(FavoriteResponse::of)
+                .map(favorite -> FavoriteResponse.of(favorite))
                 .collect(Collectors.toList());
     }
 

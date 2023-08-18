@@ -39,7 +39,7 @@ public class Section {
     }
 
     @Builder
-    public Section(@NonNull Line line,@NonNull Station upStation,@NonNull Station downStation,int distance) {
+    public Section(@NonNull Line line, @NonNull Station upStation, @NonNull Station downStation, int distance) {
         this.line = line;
         this.upStation = upStation;
         this.downStation = downStation;

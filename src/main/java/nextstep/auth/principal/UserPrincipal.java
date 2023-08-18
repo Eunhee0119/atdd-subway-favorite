@@ -1,16 +1,16 @@
 package nextstep.auth.principal;
 
 public class UserPrincipal {
-    private String username;
+    private String email;
     private String role;
 
-    public UserPrincipal(String username, String role) {
-        this.username = username;
+    public UserPrincipal(String email, String role) {
+        this.email = email;
         this.role = role;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
     public String getRole() {

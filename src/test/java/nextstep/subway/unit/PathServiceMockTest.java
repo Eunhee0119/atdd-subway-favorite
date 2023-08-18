@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static nextstep.subway.acceptance.steps.SectionSteps.지하철_노선_구간_등록;
 import static nextstep.subway.unit.fixture.LineFixture.지하철_노선_생성;
 import static nextstep.subway.unit.fixture.SectionFixture.지하철_구간_생성;
 import static nextstep.subway.unit.fixture.StationFixture.지하철역_생성;

@@ -75,7 +75,7 @@ public class FavoriteServiceMockTest {
     @DisplayName("즐겨찾기를 등록한다.")
     @Test
     void createFavorites() {
-        Favorite favorite = FavoriteFixture.즐겨찾기_등록(회원, 교대역, 양재역);
+        Favorite favorite = FavoriteFixture.즐겨찾기_등록(회원.getId(), 교대역.getId(), 양재역.getId());
         given(memberService.findMemberByEmail(EMAIL)).willReturn(회원);
         given(stationService.getStations(교대역.getId())).willReturn(교대역);
         given(stationService.getStations(양재역.getId())).willReturn(양재역);
@@ -83,9 +83,9 @@ public class FavoriteServiceMockTest {
 
         FavoriteResponse favoriteResponse = favoriteService.createFavorite(EMAIL, new FavoriteRequest(교대역.getId(), 양재역.getId()));
 
-        assertThat(favoriteResponse.getMemeber().getEmail()).isEqualTo(EMAIL);
-        assertThat(favoriteResponse.getSource().getId()).isEqualTo(교대역.getId());
-        assertThat(favoriteResponse.getTarget().getId()).isEqualTo(양재역.getId());
+        assertThat(favoriteResponse.getMemberId()).isEqualTo(회원.getId());
+        assertThat(favoriteResponse.getSourceId()).isEqualTo(교대역.getId());
+        assertThat(favoriteResponse.getTargetId()).isEqualTo(양재역.getId());
     }
 
     @DisplayName("즐겨찾기 등록에 실패한다. - 등록되지 않은 회원의 경우 에러를 던짐")
@@ -119,10 +119,10 @@ public class FavoriteServiceMockTest {
     @DisplayName("즐겨찾기를 조회한다.")
     @Test
     void findFavorite() {
-        Favorite favorite = FavoriteFixture.즐겨찾기_등록(회원, 교대역, 양재역);
+        Favorite favorite = FavoriteFixture.즐겨찾기_등록(회원.getId(), 교대역.getId(), 양재역.getId());
 
         given(memberService.findMemberByEmail(EMAIL)).willReturn(회원);
-        given(favoriteRepository.findByMember(회원)).willReturn(List.of(favorite));
+        given(favoriteRepository.findByMemberId(회원.getId())).willReturn(List.of(favorite));
 
         FavoriteResponse favorite1 = favoriteService.findFavorite(EMAIL).get(0);
         assertThat(favorite1.getId()).isEqualTo(favorite1.getId());
@@ -139,7 +139,7 @@ public class FavoriteServiceMockTest {
     @DisplayName("즐겨찾기를 삭제한다.")
     @Test
     void deleteFavorites() {
-        Favorite favorite = FavoriteFixture.즐겨찾기_등록(회원, 교대역, 양재역);
+        Favorite favorite = FavoriteFixture.즐겨찾기_등록(회원.getId(), 교대역.getId(), 양재역.getId());
         given(memberService.findMemberByEmail(EMAIL)).willReturn(회원);
         given(favoriteRepository.findById(favorite.getId())).willReturn(Optional.of(favorite));
 

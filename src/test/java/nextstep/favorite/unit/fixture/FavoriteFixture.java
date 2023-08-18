@@ -14,8 +14,8 @@ public class FavoriteFixture {
         }
     }
 
-    public static Favorite 즐겨찾기_등록(Member 회원, Station 교대역, Station 양재역) {
-        Favorite favorite = new Favorite(회원, 교대역, 양재역);
+    public static Favorite 즐겨찾기_등록(Long memberId, Long sourceId, Long targetId) {
+        Favorite favorite = new Favorite(memberId, sourceId, targetId);
         setFavoriteId(favorite);
         return favorite;
     }
